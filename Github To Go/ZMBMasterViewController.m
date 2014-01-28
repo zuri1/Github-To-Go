@@ -9,10 +9,13 @@
 #import "ZMBMasterViewController.h"
 
 #import "ZMBDetailViewController.h"
+#import "ZMBNetworkController.h"
 
 @interface ZMBMasterViewController () {
     NSMutableArray *_objects;
 }
+
+@property (nonatomic) NSArray *searchResultsArray;
 @end
 
 @implementation ZMBMasterViewController
@@ -35,6 +38,9 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (ZMBDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    
+    self.searchResultsArray = [[ZMBNetworkController sharedController] reposForSearchString:@"iOS"];
+    NSLog(@"%@", self.searchResultsArray);
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,32 +68,16 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _objects.count;
+    return self.searchResultsArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
-    NSDate *object = _objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    NSDictionary *repo = [self.searchResultsArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = [repo objectForKey:@"name"];
     return cell;
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [_objects removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }
 }
 
 /*
@@ -109,8 +99,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        NSDate *object = _objects[indexPath.row];
-        self.detailViewController.detailItem = object;
+        NSDictionary *repoDict = _searchResultsArray[indexPath.row];
+        self.detailViewController.detailItem = repoDict;
     }
 }
 

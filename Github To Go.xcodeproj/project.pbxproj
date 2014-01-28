@@ -23,6 +23,8 @@
 		8A1BA012189706B100538CDE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A1B9FEE189706B000538CDE /* UIKit.framework */; };
 		8A1BA01A189706B100538CDE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8A1BA018189706B100538CDE /* InfoPlist.strings */; };
 		8A1BA01C189706B100538CDE /* Github_To_GoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1BA01B189706B100538CDE /* Github_To_GoTests.m */; };
+		8A1BA0291897070400538CDE /* ZMBMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1BA0281897070400538CDE /* ZMBMenuViewController.m */; };
+		8A1BA02F1897301300538CDE /* ZMBNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1BA02E1897301300538CDE /* ZMBNetworkController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,10 @@
 		8A1BA017189706B100538CDE /* Github To GoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Github To GoTests-Info.plist"; sourceTree = "<group>"; };
 		8A1BA019189706B100538CDE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8A1BA01B189706B100538CDE /* Github_To_GoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Github_To_GoTests.m; sourceTree = "<group>"; };
+		8A1BA0271897070400538CDE /* ZMBMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMBMenuViewController.h; sourceTree = "<group>"; };
+		8A1BA0281897070400538CDE /* ZMBMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMBMenuViewController.m; sourceTree = "<group>"; };
+		8A1BA02D1897301300538CDE /* ZMBNetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMBNetworkController.h; sourceTree = "<group>"; };
+		8A1BA02E1897301300538CDE /* ZMBNetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMBNetworkController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,14 +123,16 @@
 		8A1B9FF0189706B000538CDE /* Github To Go */ = {
 			isa = PBXGroup;
 			children = (
+				8A1BA026189706CC00538CDE /* iPhone */,
+				8A1BA025189706BE00538CDE /* iPad */,
 				8A1B9FF9189706B000538CDE /* ZMBAppDelegate.h */,
 				8A1B9FFA189706B000538CDE /* ZMBAppDelegate.m */,
 				8A1B9FFC189706B000538CDE /* Main_iPhone.storyboard */,
 				8A1B9FFF189706B000538CDE /* Main_iPad.storyboard */,
-				8A1BA002189706B000538CDE /* ZMBMasterViewController.h */,
-				8A1BA003189706B000538CDE /* ZMBMasterViewController.m */,
 				8A1BA005189706B000538CDE /* ZMBDetailViewController.h */,
 				8A1BA006189706B000538CDE /* ZMBDetailViewController.m */,
+				8A1BA02D1897301300538CDE /* ZMBNetworkController.h */,
+				8A1BA02E1897301300538CDE /* ZMBNetworkController.m */,
 				8A1BA008189706B000538CDE /* Images.xcassets */,
 				8A1B9FF1189706B000538CDE /* Supporting Files */,
 			);
@@ -158,6 +166,24 @@
 				8A1BA018189706B100538CDE /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8A1BA025189706BE00538CDE /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				8A1BA002189706B000538CDE /* ZMBMasterViewController.h */,
+				8A1BA003189706B000538CDE /* ZMBMasterViewController.m */,
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
+		8A1BA026189706CC00538CDE /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				8A1BA0271897070400538CDE /* ZMBMenuViewController.h */,
+				8A1BA0281897070400538CDE /* ZMBMenuViewController.m */,
+			);
+			name = iPhone;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,7 +285,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A1BA0291897070400538CDE /* ZMBMenuViewController.m in Sources */,
 				8A1BA004189706B000538CDE /* ZMBMasterViewController.m in Sources */,
+				8A1BA02F1897301300538CDE /* ZMBNetworkController.m in Sources */,
 				8A1B9FFB189706B000538CDE /* ZMBAppDelegate.m in Sources */,
 				8A1B9FF7189706B000538CDE /* main.m in Sources */,
 				8A1BA007189706B000538CDE /* ZMBDetailViewController.m in Sources */,

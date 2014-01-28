@@ -36,7 +36,8 @@
     // Update the user interface for the detail item.
 
     if (self.detailItem) {
-        self.detailDescriptionLabel.text = [self.detailItem description];
+        NSString *htmlURLString = _detailItem[@"html_url"];
+        [_detailWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:htmlURLString]]];
     }
 }
 
