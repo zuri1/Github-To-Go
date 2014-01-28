@@ -8,10 +8,12 @@
 
 #import "ZMBMenuViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "ZMBNetworkController.h"
 
 @interface ZMBMenuViewController ()
 
 @property (strong,nonatomic) UIViewController *topViewController;
+@property (strong, nonatomic) NSArray *searchResultsArray;
 
 @end
 
@@ -41,6 +43,9 @@
     [self.topViewController.view.layer setShadowOpacity:0.8];
     [self.topViewController.view.layer setShadowOffset:CGSizeMake(-8, -8)];
     [self.topViewController.view.layer setShadowColor:[UIColor blackColor].CGColor];
+    
+    self.searchResultsArray = [[ZMBNetworkController sharedController] reposForSearchString:@"iOS"];
+    
 }
 
 -(void)addSlideGesture
@@ -141,25 +146,22 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return self.searchResultsArray.count;
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
+    NSDictionary *repo = [self.searchResultsArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = [repo objectForKey:@"name"];
     return cell;
 }
 
