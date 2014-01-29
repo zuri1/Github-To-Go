@@ -37,7 +37,7 @@
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
-    self.detailViewController = (ZMBDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    self.detailViewController = (ZMBDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];  //what does this do??
     
     self.searchResultsArray = [[ZMBNetworkController sharedController] reposForSearchString:@"iOS"];
 //    NSLog(@"%@", self.searchResultsArray);

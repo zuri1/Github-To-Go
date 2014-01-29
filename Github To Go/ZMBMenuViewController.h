@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZMBDetailViewController.h"
 
 @interface ZMBMenuViewController : UITableViewController <UIGestureRecognizerDelegate>
-
 
 -(void)openMenu;
 -(void)closeMenu;

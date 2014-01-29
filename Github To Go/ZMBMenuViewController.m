@@ -12,7 +12,7 @@
 
 @interface ZMBMenuViewController ()
 
-@property (strong,nonatomic) UIViewController *topViewController;
+@property (strong,nonatomic) ZMBDetailViewController *topViewController;
 @property (strong, nonatomic) NSArray *searchResultsArray;
 
 @end
@@ -164,6 +164,15 @@
     cell.textLabel.text = [repo objectForKey:@"name"];
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    NSDictionary *repoDict = _searchResultsArray[indexPath.row];
+    self.topViewController.detailItem = repoDict;
+
+}
+
 
 /*
 // Override to support conditional editing of the table view.
