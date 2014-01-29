@@ -11,11 +11,13 @@
 #import "ZMBDetailViewController.h"
 #import "ZMBNetworkController.h"
 
-@interface ZMBMasterViewController () {
+@interface ZMBMasterViewController () <UISearchBarDelegate> {
     NSMutableArray *_objects;
 }
 
 @property (nonatomic) NSArray *searchResultsArray;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+
 @end
 
 @implementation ZMBMasterViewController
@@ -32,15 +34,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+	
+    self.searchBar.delegate = self;
+    
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (ZMBDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];  //what does this do??
     
-    self.searchResultsArray = [[ZMBNetworkController sharedController] reposForSearchString:@"iOS"];
-//    NSLog(@"%@", self.searchResultsArray);
+    }
+
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    NSString *searchBarText = searchBar.text;
+    self.searchResultsArray = [[ZMBNetworkController sharedController] reposForSearchString:searchBarText];
+    [searchBar resignFirstResponder];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
