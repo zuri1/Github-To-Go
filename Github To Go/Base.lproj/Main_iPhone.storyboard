@@ -33,10 +33,13 @@
                             <outlet property="delegate" destination="LNV-wt-GnZ" id="JZL-xB-OPe"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="searchBar" destination="FX6-hm-WLd" id="TAN-NQ-Joa"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ixd-Au-tze" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="266" y="29"/>
+            <point key="canvasLocation" x="266" y="34"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="Ddc-PZ-oFl">

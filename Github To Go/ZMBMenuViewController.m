@@ -10,10 +10,11 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ZMBNetworkController.h"
 
-@interface ZMBMenuViewController ()
+@interface ZMBMenuViewController () <UISearchBarDelegate>
 
 @property (strong,nonatomic) ZMBDetailViewController *topViewController;
 @property (strong, nonatomic) NSArray *searchResultsArray;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
 
@@ -31,6 +32,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+   
+    self.searchBar.delegate = self;
     
     self.topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"orange"];
     [self addChildViewController:self.topViewController];
@@ -44,8 +47,15 @@
     [self.topViewController.view.layer setShadowOffset:CGSizeMake(-8, -8)];
     [self.topViewController.view.layer setShadowColor:[UIColor blackColor].CGColor];
     
-    self.searchResultsArray = [[ZMBNetworkController sharedController] reposForSearchString:@"iOS"];
     
+}
+
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    NSString *searchBarText = searchBar.text;
+    self.searchResultsArray = [[ZMBNetworkController sharedController] reposForSearchString:searchBarText];
+    [searchBar resignFirstResponder];
+    [self.tableView reloadData];
 }
 
 -(void)addSlideGesture
@@ -167,7 +177,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    
     NSDictionary *repoDict = _searchResultsArray[indexPath.row];
     self.topViewController.detailItem = repoDict;
 
