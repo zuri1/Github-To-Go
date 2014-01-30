@@ -19,12 +19,15 @@
 
 - (void)setDetailItem:(id)newDetailItem
 {
+    NSLog(@"setting detail item");
     if (_detailItem != newDetailItem) {
         _detailItem = newDetailItem;
         
         // Update the view.
         [self configureView];
     }
+    
+
 
     if (self.masterPopoverController != nil) {
         [self.masterPopoverController dismissPopoverAnimated:YES];
@@ -38,20 +41,20 @@
     if (self.detailItem) {
         NSString *htmlURLString = _detailItem[@"html_url"];
         [_detailWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:htmlURLString]]];
+        NSLog(@"htmlURL: %@", htmlURLString);
     }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+	
     [self configureView];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Split view

@@ -11,6 +11,7 @@
 
 @interface ZMBMenuViewController : UITableViewController <UIGestureRecognizerDelegate>
 
--(void)openMenu;
--(void)closeMenu;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic) ZMBDetailViewController *detailViewController;
+
 @end

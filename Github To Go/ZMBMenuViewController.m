@@ -12,7 +12,6 @@
 
 @interface ZMBMenuViewController () <UISearchBarDelegate>
 
-@property (strong,nonatomic) ZMBDetailViewController *topViewController;
 @property (strong, nonatomic) NSArray *searchResultsArray;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
@@ -35,20 +34,8 @@
    
     self.searchBar.delegate = self;
     
-    self.topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"orange"];
-    [self addChildViewController:self.topViewController];
-    self.topViewController.view.frame = self.view.frame;
-    [self.view addSubview:self.topViewController.view];
-    [self.topViewController didMoveToParentViewController:self];
-    
-    [self addSlideGesture];
-    
-    [self.topViewController.view.layer setShadowOpacity:0.8];
-    [self.topViewController.view.layer setShadowOffset:CGSizeMake(-8, -8)];
-    [self.topViewController.view.layer setShadowColor:[UIColor blackColor].CGColor];
-    
-    
 }
+
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
@@ -58,99 +45,13 @@
     [self.tableView reloadData];
 }
 
--(void)addSlideGesture
-{
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(slidePanel:)];
-    
-    pan.minimumNumberOfTouches = 1;
-    pan.maximumNumberOfTouches = 1;
-    
-    pan.delegate = self;
-    
-    [self.topViewController.view addGestureRecognizer:pan];
-    
-    
-}
-
--(void)slidePanel:(id)sender
-{
-    UIPanGestureRecognizer *pan = (UIPanGestureRecognizer *)sender;
-    
-    CGPoint velocity = [pan velocityInView:self.view];
-    CGPoint translation = [pan translationInView:self.view];
-    
-    if (pan.state == UIGestureRecognizerStateChanged) {
-        if (self.topViewController.view.frame.origin.x + translation.x > 0) {
-            self.topViewController.view.center = CGPointMake(self.topViewController.view.center.x + translation.x, self.topViewController.view.center.y);
-            
-//            CGFloat offset = 1 - [(self.topViewController.view.frame.origin.x / self.view.frame.size.width)];
-            
-            [(UIPanGestureRecognizer *)sender setTranslation:CGPointMake(0, 0) inView:self.view];
-        }
-    }
-    
-    if (pan.state == UIGestureRecognizerStateEnded) {
-        if (self.topViewController.view.frame.origin.x > self.view.frame.size.width / 2) {
-            [self openMenu];
-        }
-        if (self.topViewController.view.frame.origin.x < self.view.frame.size.width / 2) {
-            [UIView animateWithDuration:.4 animations:^{
-                self.topViewController.view.frame = self.view.frame;
-            } completion:^(BOOL finished) {
-                [self closeMenu];
-            }];
-        }
-    }
-    
-}
-
--(void)openMenu
-{
-    [UIView animateWithDuration:1 animations:^{
-        self.topViewController.view.frame = CGRectMake(self.view.frame.size.width * .8, self.topViewController.view.frame.origin.y, self.topViewController.view.frame.size.width, self.topViewController.view.frame.size.height);
-        self.topViewController.view.backgroundColor = [UIColor purpleColor];
-    } completion:^(BOOL finished) {
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(slideBack:)];
-        [self.topViewController.view addGestureRecognizer:tap];
-    }];
-}
-
--(void)closeMenu
-{
-    [UIView animateWithDuration:0.2 animations:^{
-        self.topViewController.view.frame = CGRectMake(self.topViewController.view.frame.origin.x + 20.f, self.topViewController.view.frame.origin.y, self.topViewController.view.frame.size.width, self.topViewController.view.frame.size.height);
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.1 animations:^{
-            self.topViewController.view.frame = self.view.frame;
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.1 animations:^{
-                self.topViewController.view.frame = CGRectMake(self.topViewController.view.frame.origin.x + 15.f, self.topViewController.view.frame.origin.y, self.topViewController.view.frame.size.width, self.topViewController.view.frame.size.height);
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.1 animations:^{
-                    self.topViewController.view.frame = self.view.frame;
-                }];
-            }];
-        }];
-    }];
-}
-
--(void)slideBack:(id)sender
-{
-    [UIView animateWithDuration:.4 animations:^{
-        self.topViewController.view.frame = self.view.frame;
-        self.topViewController.view.backgroundColor = [UIColor redColor];
-    } completion:^(BOOL finished) {
-        [self.topViewController.view removeGestureRecognizer:(UITapGestureRecognizer *)sender];
-        
-        [self closeMenu];
-    }];
-}
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 #pragma mark - Table view data source
 
@@ -175,64 +76,30 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    NSDictionary *repoDict = _searchResultsArray[indexPath.row];
-    self.topViewController.detailItem = repoDict;
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    NSDictionary *repoDict = _searchResultsArray[indexPath.row];
+//    self.detailViewController.detailItem = repoDict;
+//}
 
-}
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
 #pragma mark - Navigation
 
-// In a story board-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    
+    if ([segue.identifier isEqualToString:@"viewRepo"]) {
+        ZMBDetailViewController *detailVC = (ZMBDetailViewController *)segue.destinationViewController;
+        
+        NSIndexPath *selectedItemPath = [self.tableView indexPathForSelectedRow];
+        NSDictionary *repoDict = _searchResultsArray[selectedItemPath.row];
+        detailVC.detailItem = repoDict;
+        
+    }
+    
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
 
- */
+
 
 @end
