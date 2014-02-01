@@ -26,6 +26,9 @@
 		8A1BA0291897070400538CDE /* ZMBMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1BA0281897070400538CDE /* ZMBMenuViewController.m */; };
 		8A1BA02F1897301300538CDE /* ZMBNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1BA02E1897301300538CDE /* ZMBNetworkController.m */; };
 		8AD5A3A71899A80000EA3487 /* ZMBSidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5A3A61899A80000EA3487 /* ZMBSidebarViewController.m */; };
+		8AD5A3AD189B164000EA3487 /* ZMBCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5A3AC189B164000EA3487 /* ZMBCollectionViewController.m */; };
+		8AD5A3B0189B197C00EA3487 /* ZMBCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5A3AF189B197C00EA3487 /* ZMBCollectionViewCell.m */; };
+		8AD5A3B3189B19B200EA3487 /* ZMBGitUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5A3B2189B19B200EA3487 /* ZMBGitUser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +70,12 @@
 		8A1BA02E1897301300538CDE /* ZMBNetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMBNetworkController.m; sourceTree = "<group>"; };
 		8AD5A3A51899A80000EA3487 /* ZMBSidebarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMBSidebarViewController.h; sourceTree = "<group>"; };
 		8AD5A3A61899A80000EA3487 /* ZMBSidebarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMBSidebarViewController.m; sourceTree = "<group>"; };
+		8AD5A3AB189B164000EA3487 /* ZMBCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMBCollectionViewController.h; sourceTree = "<group>"; };
+		8AD5A3AC189B164000EA3487 /* ZMBCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMBCollectionViewController.m; sourceTree = "<group>"; };
+		8AD5A3AE189B197C00EA3487 /* ZMBCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMBCollectionViewCell.h; sourceTree = "<group>"; };
+		8AD5A3AF189B197C00EA3487 /* ZMBCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMBCollectionViewCell.m; sourceTree = "<group>"; };
+		8AD5A3B1189B19B200EA3487 /* ZMBGitUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMBGitUser.h; sourceTree = "<group>"; };
+		8AD5A3B2189B19B200EA3487 /* ZMBGitUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMBGitUser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +145,10 @@
 				8A1BA006189706B000538CDE /* ZMBDetailViewController.m */,
 				8A1BA02D1897301300538CDE /* ZMBNetworkController.h */,
 				8A1BA02E1897301300538CDE /* ZMBNetworkController.m */,
+				8AD5A3B1189B19B200EA3487 /* ZMBGitUser.h */,
+				8AD5A3B2189B19B200EA3487 /* ZMBGitUser.m */,
+				8AD5A3AE189B197C00EA3487 /* ZMBCollectionViewCell.h */,
+				8AD5A3AF189B197C00EA3487 /* ZMBCollectionViewCell.m */,
 				8A1BA008189706B000538CDE /* Images.xcassets */,
 				8A1B9FF1189706B000538CDE /* Supporting Files */,
 			);
@@ -187,6 +200,8 @@
 				8A1BA0281897070400538CDE /* ZMBMenuViewController.m */,
 				8AD5A3A51899A80000EA3487 /* ZMBSidebarViewController.h */,
 				8AD5A3A61899A80000EA3487 /* ZMBSidebarViewController.m */,
+				8AD5A3AB189B164000EA3487 /* ZMBCollectionViewController.h */,
+				8AD5A3AC189B164000EA3487 /* ZMBCollectionViewController.m */,
 			);
 			name = iPhone;
 			sourceTree = "<group>";
@@ -291,9 +306,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A1BA0291897070400538CDE /* ZMBMenuViewController.m in Sources */,
+				8AD5A3B0189B197C00EA3487 /* ZMBCollectionViewCell.m in Sources */,
 				8A1BA004189706B000538CDE /* ZMBMasterViewController.m in Sources */,
 				8AD5A3A71899A80000EA3487 /* ZMBSidebarViewController.m in Sources */,
 				8A1BA02F1897301300538CDE /* ZMBNetworkController.m in Sources */,
+				8AD5A3B3189B19B200EA3487 /* ZMBGitUser.m in Sources */,
+				8AD5A3AD189B164000EA3487 /* ZMBCollectionViewController.m in Sources */,
 				8A1B9FFB189706B000538CDE /* ZMBAppDelegate.m in Sources */,
 				8A1B9FF7189706B000538CDE /* main.m in Sources */,
 				8A1BA007189706B000538CDE /* ZMBDetailViewController.m in Sources */,
