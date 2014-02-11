@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Repo.h"
 
 @interface ZMBDetailViewController : UIViewController <UISplitViewControllerDelegate>
 
-@property (strong, nonatomic) id detailItem;
+@property (strong, nonatomic) Repo *repo;
 
 @property (weak, nonatomic) IBOutlet UIWebView *detailWebView;
 @end

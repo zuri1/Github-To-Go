@@ -17,11 +17,11 @@
 
 #pragma mark - Managing the detail item
 
-- (void)setDetailItem:(id)newDetailItem
+- (void)setRepo:(Repo *)repo
 {
     NSLog(@"setting detail item");
-    if (_detailItem != newDetailItem) {
-        _detailItem = newDetailItem;
+    if (_repo != repo) {
+        _repo = repo;
         
         // Update the view.
         [self configureView];
@@ -38,12 +38,20 @@
 {
     // Update the user interface for the detail item.
 
-    if (self.detailItem) {
-        NSString *htmlURLString = _detailItem[@"html_url"];
-        [_detailWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:htmlURLString]]];
-        NSLog(@"htmlURL: %@", htmlURLString);
-    }
+//    if (self.repo) {
+        NSURL *htmlURL = [NSURL URLWithString:_repo.html_url];
+        if (!self.repo.html_string) {
+            
+            self.repo.html_string = [NSString stringWithContentsOfURL:htmlURL encoding:NSUTF8StringEncoding error:nil];
+        }
+        [_detailWebView loadHTMLString:self.repo.html_string baseURL:nil];
+         //BaseURL: path to documents directory?
+        NSLog(@"htmlURL: %@", htmlURL);
+//    }
 }
+     
+
+         
 
 - (void)viewDidLoad
 {

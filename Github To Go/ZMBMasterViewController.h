@@ -10,8 +10,10 @@
 
 @class ZMBDetailViewController;
 
-@interface ZMBMasterViewController : UITableViewController
+@interface ZMBMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) ZMBDetailViewController *detailViewController;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedRequestsController;
 
 @end

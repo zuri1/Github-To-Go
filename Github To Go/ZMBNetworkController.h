@@ -12,6 +12,6 @@
 
 + (ZMBNetworkController *)sharedController;
 
-- (NSArray *)reposForSearchString:(NSString *)searchString;
+- (NSMutableArray *)reposForSearchString:(NSString *)searchString;
 
 @end

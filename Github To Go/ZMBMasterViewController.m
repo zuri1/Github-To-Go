@@ -10,12 +10,14 @@
 
 #import "ZMBDetailViewController.h"
 #import "ZMBNetworkController.h"
+#import "Repo.h"
+#import "ZMBAppDelegate.h"
 
 @interface ZMBMasterViewController () <UISearchBarDelegate> {
     NSMutableArray *_objects;
 }
 
-@property (nonatomic) NSArray *searchResultsArray;
+@property (nonatomic) NSMutableArray *searchResultsArray;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
@@ -35,25 +37,57 @@
 {
     [super viewDidLoad];
 	
+//    _searchResultsArray = [NSMutableArray new];
+    
     self.searchBar.delegate = self;
     
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
     self.detailViewController = (ZMBDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];  //what does this do??
+    
+    ZMBAppDelegate *appDelegate = (ZMBAppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.managedObjectContext = appDelegate.managedObjectContext;
     }
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    NSError *error;
+    
     NSString *searchBarText = searchBar.text;
     self.searchResultsArray = [[ZMBNetworkController sharedController] reposForSearchString:searchBarText];
     [searchBar resignFirstResponder];
     [self.tableView reloadData];
+    
+    for (NSDictionary *dictionary in self.searchResultsArray) {
+        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Repo" inManagedObjectContext:self.managedObjectContext];
+        Repo *repo = [[Repo alloc ] initWithEntity:entityDescription insertIntoManagedObjectContext:self.managedObjectContext withJSONDictionary:dictionary];
+        [repo.managedObjectContext save:&error];
+    }
 }
 
-- (void)didReceiveMemoryWarning
+
+
+-(NSFetchedResultsController *)fetchedRequestsController
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    if (_fetchedRequestsController) {
+        
+        NSLog(@"fetchedRequestController is not nil");
+        return _fetchedRequestsController;
+    }
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Repo" inManagedObjectContext:self.managedObjectContext];
+    request.entity = entityDescription;
+    request.fetchBatchSize = 25;
+    
+    // can sort on any column
+    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    request.sortDescriptors = @[descriptor];  // takes an array
+    self.fetchedRequestsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Repo"]; // cache name is typically model name
+    
+    // perform fetch
+    [self.fetchedRequestsController performFetch:nil];
+    
+    return _fetchedRequestsController;
 }
 
 
@@ -66,33 +100,28 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.searchResultsArray.count;
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedRequestsController sections][section];
+    NSLog(@"section info number of objects %i", [sectionInfo numberOfObjects]);
+    return [sectionInfo numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
-    NSDictionary *repo = [self.searchResultsArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = [repo objectForKey:@"name"];
+    NSLog(@" index path row %i", indexPath.row);
+    
+    Repo *repo = [self.fetchedRequestsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = repo.name;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        NSDictionary *repoDict = _searchResultsArray[indexPath.row];
-        self.detailViewController.detailItem = repoDict;
+        Repo *repo = [[self fetchedRequestsController] objectAtIndexPath:indexPath];
+        self.detailViewController.repo = repo;
     }
 }
-
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-//        NSDate *object = _objects[indexPath.row];
-//        [[segue destinationViewController] setDetailItem:object];
-//    }
-//}
 
 @end

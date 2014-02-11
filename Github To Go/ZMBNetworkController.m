@@ -20,7 +20,7 @@
     return shared;
 }
 
--(NSArray *)reposForSearchString:(NSString *)searchString
+-(NSMutableArray *)reposForSearchString:(NSString *)searchString
 {
     searchString = [NSString stringWithFormat:@"https:api.github.com/search/repositories?q=%@", searchString];
     

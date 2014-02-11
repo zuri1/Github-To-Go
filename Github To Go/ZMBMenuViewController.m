@@ -92,7 +92,7 @@
         
         NSIndexPath *selectedItemPath = [self.tableView indexPathForSelectedRow];
         NSDictionary *repoDict = _searchResultsArray[selectedItemPath.row];
-        detailVC.detailItem = repoDict;
+//        detailVC.detailItem = repoDict;
         
     }
     

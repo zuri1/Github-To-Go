@@ -25,6 +25,9 @@
 		8A1BA01C189706B100538CDE /* Github_To_GoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1BA01B189706B100538CDE /* Github_To_GoTests.m */; };
 		8A1BA0291897070400538CDE /* ZMBMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1BA0281897070400538CDE /* ZMBMenuViewController.m */; };
 		8A1BA02F1897301300538CDE /* ZMBNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1BA02E1897301300538CDE /* ZMBNetworkController.m */; };
+		8A99F3B718AAB3980075356F /* Github_To_Go.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A99F3B518AAB3980075356F /* Github_To_Go.xcdatamodeld */; };
+		8A99F3BA18AAC65A0075356F /* Repo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A99F3B918AAC65A0075356F /* Repo.m */; };
+		8AAB4B9D189C821D0069FB36 /* ZMBUsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAB4B9C189C821D0069FB36 /* ZMBUsersViewController.m */; };
 		8AD5A3A71899A80000EA3487 /* ZMBSidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5A3A61899A80000EA3487 /* ZMBSidebarViewController.m */; };
 		8AD5A3AD189B164000EA3487 /* ZMBCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5A3AC189B164000EA3487 /* ZMBCollectionViewController.m */; };
 		8AD5A3B0189B197C00EA3487 /* ZMBCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5A3AF189B197C00EA3487 /* ZMBCollectionViewCell.m */; };
@@ -68,6 +71,11 @@
 		8A1BA0281897070400538CDE /* ZMBMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMBMenuViewController.m; sourceTree = "<group>"; };
 		8A1BA02D1897301300538CDE /* ZMBNetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMBNetworkController.h; sourceTree = "<group>"; };
 		8A1BA02E1897301300538CDE /* ZMBNetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMBNetworkController.m; sourceTree = "<group>"; };
+		8A99F3B618AAB3980075356F /* Github_To_Go.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Github_To_Go.xcdatamodel; sourceTree = "<group>"; };
+		8A99F3B818AAC65A0075356F /* Repo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Repo.h; sourceTree = "<group>"; };
+		8A99F3B918AAC65A0075356F /* Repo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Repo.m; sourceTree = "<group>"; };
+		8AAB4B9B189C821D0069FB36 /* ZMBUsersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMBUsersViewController.h; sourceTree = "<group>"; };
+		8AAB4B9C189C821D0069FB36 /* ZMBUsersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMBUsersViewController.m; sourceTree = "<group>"; };
 		8AD5A3A51899A80000EA3487 /* ZMBSidebarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMBSidebarViewController.h; sourceTree = "<group>"; };
 		8AD5A3A61899A80000EA3487 /* ZMBSidebarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMBSidebarViewController.m; sourceTree = "<group>"; };
 		8AD5A3AB189B164000EA3487 /* ZMBCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMBCollectionViewController.h; sourceTree = "<group>"; };
@@ -139,6 +147,9 @@
 				8A1BA025189706BE00538CDE /* iPad */,
 				8A1B9FF9189706B000538CDE /* ZMBAppDelegate.h */,
 				8A1B9FFA189706B000538CDE /* ZMBAppDelegate.m */,
+				8A99F3B518AAB3980075356F /* Github_To_Go.xcdatamodeld */,
+				8A99F3B818AAC65A0075356F /* Repo.h */,
+				8A99F3B918AAC65A0075356F /* Repo.m */,
 				8A1B9FFC189706B000538CDE /* Main_iPhone.storyboard */,
 				8A1B9FFF189706B000538CDE /* Main_iPad.storyboard */,
 				8A1BA005189706B000538CDE /* ZMBDetailViewController.h */,
@@ -189,6 +200,8 @@
 			children = (
 				8A1BA002189706B000538CDE /* ZMBMasterViewController.h */,
 				8A1BA003189706B000538CDE /* ZMBMasterViewController.m */,
+				8AAB4B9B189C821D0069FB36 /* ZMBUsersViewController.h */,
+				8AAB4B9C189C821D0069FB36 /* ZMBUsersViewController.m */,
 			);
 			name = iPad;
 			sourceTree = "<group>";
@@ -305,12 +318,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A99F3BA18AAC65A0075356F /* Repo.m in Sources */,
 				8A1BA0291897070400538CDE /* ZMBMenuViewController.m in Sources */,
 				8AD5A3B0189B197C00EA3487 /* ZMBCollectionViewCell.m in Sources */,
 				8A1BA004189706B000538CDE /* ZMBMasterViewController.m in Sources */,
 				8AD5A3A71899A80000EA3487 /* ZMBSidebarViewController.m in Sources */,
 				8A1BA02F1897301300538CDE /* ZMBNetworkController.m in Sources */,
+				8AAB4B9D189C821D0069FB36 /* ZMBUsersViewController.m in Sources */,
 				8AD5A3B3189B19B200EA3487 /* ZMBGitUser.m in Sources */,
+				8A99F3B718AAB3980075356F /* Github_To_Go.xcdatamodeld in Sources */,
 				8AD5A3AD189B164000EA3487 /* ZMBCollectionViewController.m in Sources */,
 				8A1B9FFB189706B000538CDE /* ZMBAppDelegate.m in Sources */,
 				8A1B9FF7189706B000538CDE /* main.m in Sources */,
@@ -545,6 +561,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8A99F3B518AAB3980075356F /* Github_To_Go.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8A99F3B618AAB3980075356F /* Github_To_Go.xcdatamodel */,
+			);
+			currentVersion = 8A99F3B618AAB3980075356F /* Github_To_Go.xcdatamodel */;
+			path = Github_To_Go.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 8A1B9FDF189706B000538CDE /* Project object */;
 }
