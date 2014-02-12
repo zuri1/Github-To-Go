@@ -19,6 +19,8 @@
 
 @property (nonatomic) NSMutableArray *searchResultsArray;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) ZMBNetworkController *networkController;
+@property (weak, nonatomic) ZMBAppDelegate *appDelegate;
 
 @end
 
@@ -37,6 +39,13 @@
 {
     [super viewDidLoad];
 	
+    self.appDelegate = (ZMBAppDelegate *)[UIApplication sharedApplication].delegate;
+    self.networkController = self.appDelegate.networkController;
+    
+    [self.networkController performSelector:@selector(beginOAuthAccess) withObject:nil afterDelay:.1];
+
+    
+    
 //    _searchResultsArray = [NSMutableArray new];
     
     self.searchBar.delegate = self;

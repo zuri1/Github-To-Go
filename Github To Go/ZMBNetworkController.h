@@ -10,8 +10,12 @@
 
 @interface ZMBNetworkController : NSObject
 
+@property (nonatomic, strong) NSString *accessToken;
+
 + (ZMBNetworkController *)sharedController;
 
 - (NSMutableArray *)reposForSearchString:(NSString *)searchString;
+-(void)handleCallBackURL:(NSURL *)url;
+-(void)beginOAuthAccess;
 
 @end

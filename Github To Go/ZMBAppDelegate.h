@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZMBNetworkController.h"
 
 @interface ZMBAppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -14,6 +15,7 @@
 @property (strong, nonatomic, readonly) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic, readonly) NSManagedObjectModel *managedObjectModel;
 @property (strong, nonatomic, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (strong, nonatomic) ZMBNetworkController *networkController;
 
 -(void)saveContext;
 -(NSURL *)applicationDocumentsDirectory;
