@@ -19,5 +19,6 @@
 - (NSMutableArray *)reposForSearchString:(NSString *)searchString;
 -(void)handleCallBackURL:(NSURL *)url;
 -(void)beginOAuthAccess;
+-(void)createNewRepo:(NSString *)repoName;
 
 @end

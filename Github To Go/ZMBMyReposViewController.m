@@ -64,6 +64,15 @@
 
 }
 
+- (IBAction)addRepoButton:(id)sender {
+    
+    [self.networkController createNewRepo:@"arbitrary string"];
+    
+    
+    [self.tableView reloadData];
+    [self authenticateButtonPressed];
+}
+
 - (IBAction)authenticateButtonPressed {
     self.networkController = self.appDelegate.networkController;
     

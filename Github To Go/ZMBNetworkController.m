@@ -123,7 +123,7 @@
     
     NSDictionary *jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                     
-                                    @"new_repo2", @"name", nil];
+                                    repoName, @"name", nil];
     
     [theRequest setHTTPMethod:@"POST"];
     
