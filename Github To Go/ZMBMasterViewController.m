@@ -13,7 +13,7 @@
 #import "Repo.h"
 #import "ZMBAppDelegate.h"
 
-@interface ZMBMasterViewController () <UISearchBarDelegate> {
+@interface ZMBMasterViewController () <UISearchBarDelegate, AuthenticateButtonProtocol, LoginDelegate> {
     NSMutableArray *_objects;
 }
 
@@ -40,10 +40,7 @@
     [super viewDidLoad];
 	
     self.appDelegate = (ZMBAppDelegate *)[UIApplication sharedApplication].delegate;
-    self.networkController = self.appDelegate.networkController;
-    
-    [self.networkController performSelector:@selector(beginOAuthAccess) withObject:nil afterDelay:.1];
-
+    self.appDelegate.delegate = self;
     
     
 //    _searchResultsArray = [NSMutableArray new];
@@ -54,9 +51,44 @@
     
     self.detailViewController = (ZMBDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];  //what does this do??
     
+    self.detailViewController.delegate = self;
+    
     ZMBAppDelegate *appDelegate = (ZMBAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.managedObjectContext = appDelegate.managedObjectContext;
-    }
+
+    
+    
+}
+
+-(void)confirmLogin {
+    self.detailViewController.authButton.hidden = YES;
+}
+
+-(BOOL)authenticate {
+    return self.appDelegate.authenticated;
+}
+
+-(void)authenticateButtonPressed {
+    self.networkController = self.appDelegate.networkController;
+    [self.networkController performSelector:@selector(beginOAuthAccess) withObject:nil afterDelay:.1];
+}
+
+- (IBAction)myReposBarButtonItemPressed:(id)sender {
+    
+
+    
+    ZMBNetworkController *nc =[ZMBNetworkController sharedController];
+    
+    NSLog(@"this is the dictionary from Master view controller %@", nc.myRepoDictionary);
+    
+//    for (NSDictionary *dictionary in nc.myRepoDictionary) {
+//        [self.searchResultsArray addObject:[dictionary valueForKey:@"name"]];
+//    }
+    self.searchResultsArray = nc.repoArray;
+    
+    [self.tableView reloadData];
+}
+
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {

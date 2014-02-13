@@ -76,16 +76,22 @@
     NSData *responseData = [NSData dataWithContentsOfURL:myURL];
     
     NSError *error;
+
     NSMutableDictionary *repoDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+    self.repoArray = [NSMutableArray new];
+  
+    for (NSDictionary *dictionary in repoDictionary) {
+        [self.repoArray addObject:[dictionary valueForKey:@"name"]];
+    }
     
-    NSLog(@"%@", repoDictionary);
+
 }
 
 -(NSString *)convertURLToCode:(NSURL *)url
 {
     NSString *query = [url query];
     NSArray *components = [query componentsSeparatedByString:@"="];
-    NSLog(@"%@", components);
+//    NSLog(@"%@", components);
     NSString *code = [components lastObject];
     return code;
 }
@@ -101,6 +107,56 @@
     return [components2 lastObject];
     
     return tokenResponse;
+}
+
+-(void)createNewRepo:(NSString *)repoName {
+    
+    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+    
+    NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+    
+    NSString *stringURL = [NSString stringWithFormat:@"https://api.github.com/user/repos?access_token=%@", self.accessToken];
+    
+    NSURL *url = [NSURL URLWithString:stringURL];
+    
+    NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url];
+    
+    NSDictionary *jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    
+                                    @"new_repo2", @"name", nil];
+    
+    [theRequest setHTTPMethod:@"POST"];
+    
+    [theRequest addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    NSError *error;
+    
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:jsonDictionary
+                        
+                                                       options:NSJSONWritingPrettyPrinted error:&error];
+    
+    [theRequest setHTTPBody:jsonData];
+    
+    NSURLSessionDataTask * dataTask =[defaultSession dataTaskWithRequest:theRequest
+                                      
+                                                       completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                           
+                                                           NSLog(@"Response:%@ %@\n", response, error);
+                                                           
+                                                           if(error == nil)
+                                                               
+                                                           {
+                                                               
+                                                               NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
+                                                               
+                                                               NSLog(@"Data = %@",text);
+                                                               
+                                                           }
+                                                           
+                                                       }];
+    
+    [dataTask resume];
+    
 }
 
 @end

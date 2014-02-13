@@ -36,6 +36,17 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mlD-4U-uCY">
+                                <rect key="frame" x="270" y="254" width="162" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Login With GitHub">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="authButtonPressed:" destination="JEX-9P-axG" eventType="touchUpInside" id="c1R-1f-lH2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -49,6 +60,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM"/>
                     <connections>
+                        <outlet property="authButton" destination="mlD-4U-uCY" id="dnW-Ky-Ta6"/>
                         <outlet property="detailWebView" destination="UxU-tu-cE8" id="mcf-nS-y5a"/>
                     </connections>
                 </viewController>
@@ -112,7 +124,17 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Repos" id="Zdf-7t-Un8"/>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="xyW-Eq-zeR"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Repos" id="Zdf-7t-Un8">
+                        <barButtonItem key="rightBarButtonItem" title="My Repos" id="7JH-37-YJc">
+                            <connections>
+                                <action selector="myReposBarButtonItemPressed:" destination="7bK-jq-Zjz" id="fzo-pu-1u2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="searchBar" destination="qau-Tu-AfK" id="Gqr-3c-o3h"/>
                     </connections>

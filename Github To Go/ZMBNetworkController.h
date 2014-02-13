@@ -11,6 +11,8 @@
 @interface ZMBNetworkController : NSObject
 
 @property (nonatomic, strong) NSString *accessToken;
+@property (nonatomic, strong) NSMutableDictionary *myRepoDictionary;
+@property (nonatomic, strong) NSMutableArray *repoArray;
 
 + (ZMBNetworkController *)sharedController;
 

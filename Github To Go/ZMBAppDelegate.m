@@ -33,7 +33,10 @@
 
 -(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
-    [[ZMBNetworkController sharedController] handleCallBackURL:url];
+    [self.networkController handleCallBackURL:url];
+
+    self.authenticated = YES;
+    [self.delegate confirmLogin];
     
     return YES;
 }

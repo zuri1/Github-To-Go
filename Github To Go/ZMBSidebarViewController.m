@@ -10,6 +10,7 @@
 #import "ZMBMenuViewController.h"
 #import "ZMBCollectionViewController.h"
 
+
 @interface ZMBSidebarViewController () <UIGestureRecognizerDelegate>
 
 @property (strong,nonatomic) UIViewController *topViewController;
@@ -43,6 +44,8 @@
     [self.topViewController.view.layer setShadowOffset:CGSizeMake(-8, -8)];
     [self.topViewController.view.layer setShadowColor:[UIColor blackColor].CGColor];
 }
+
+
 
 -(void)addSlideGesture
 {
@@ -144,7 +147,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return 3;
 }
 
 //- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -182,6 +185,22 @@
         
         [self.topViewController.view removeFromSuperview];
         self.topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"repoSearch"];
+        [self addChildViewController:self.topViewController];
+        self.topViewController.view.frame = self.view.frame;
+        [self.view addSubview:self.topViewController.view];
+        [self.topViewController didMoveToParentViewController:self];
+        
+        [self addSlideGesture];
+        
+        [self.topViewController.view.layer setShadowOpacity:0.8];
+        [self.topViewController.view.layer setShadowOffset:CGSizeMake(-8, -8)];
+        [self.topViewController.view.layer setShadowColor:[UIColor blackColor].CGColor];
+        
+        [self closeMenu];
+    }
+    if (indexPath.row == 2) {
+        [self.topViewController.view removeFromSuperview];
+        self.topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"myRepos"];
         [self addChildViewController:self.topViewController];
         self.topViewController.view.frame = self.view.frame;
         [self.view addSubview:self.topViewController.view];

@@ -34,6 +34,17 @@
     }        
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"viewWillAppear");
+    
+    if ([self.delegate authenticate]) {
+        self.authButton.hidden = YES;
+    } else {
+        self.authButton.hidden = NO;
+    }
+}
+
 
 
 - (void)configureView
@@ -83,4 +94,7 @@
     self.masterPopoverController = nil;
 }
 
+- (IBAction)authButtonPressed:(id)sender {
+    [self.delegate authenticateButtonPressed];
+}
 @end

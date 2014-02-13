@@ -9,11 +9,23 @@
 #import <UIKit/UIKit.h>
 #import "Repo.h"
 
+
+@protocol AuthenticateButtonProtocol <NSObject>
+
+-(void)authenticateButtonPressed;
+-(BOOL)authenticate;
+
+@end
+
 @interface ZMBDetailViewController : UIViewController <UISplitViewControllerDelegate>
 
 @property (strong, nonatomic) Repo *repo;
 
 @property (weak, nonatomic) IBOutlet UIWebView *detailWebView;
+@property (weak, nonatomic) IBOutlet UIButton *authButton;
+@property (weak, nonatomic) id<AuthenticateButtonProtocol> delegate;
+- (IBAction)authButtonPressed:(id)sender;
 
 
 @end
+
